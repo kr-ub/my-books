@@ -1,0 +1,260 @@
+* {
+  box-sizing: border-box;
+}
+$primaryColor: #fff;
+$borderColor: #2eb9ae;
+$isActiveColor: #adffab;
+$formBgColor: #4874ad;
+
+@mixin BgSet($path, $size, $pos: center) {
+  background: url($path);
+  background-size: $size;
+  background-position: $pos;
+  background-repeat: no-repeat;
+}
+@mixin Flex($justify: center, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+@mixin VirtualFill($pos: absolute) {
+  content: '';
+  position: $pos;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+@mixin Size($width: 100%, $height: 100%) {
+  width: $width;
+  height: $height;
+}
+.signin-body {
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: $primaryColor;
+  overflow: hidden;
+  @include Size(100%, 100%);
+  @include BgSet('./bookcafeBg.jpg', cover, bottom center);
+  @include Flex();
+  @keyframes effectRightMove {
+    0% {
+    }
+    100% {
+      left: 100%;
+    }
+  }
+  @keyframes effectLeftMove {
+    0% {
+    }
+    100% {
+      right: 100%;
+    }
+  }
+  @keyframes effectUpMove {
+    0% {
+    }
+    100% {
+      top: 100%;
+    }
+  }
+  @keyframes effectDownMove {
+    0% {
+    }
+    100% {
+      bottom: 100%;
+    }
+  }
+  .effect.horizontal,
+  .effect.vertical {
+    position: absolute;
+    width: 200px;
+    height: 5px;
+  }
+  .effect.vertical {
+    width: 5px;
+    height: 100px;
+    background: #fff;
+  }
+  .effect.horizontal:nth-child(odd) {
+    animation: effectRightMove 2s ease-in-out forwards;
+    background: linear-gradient(45deg, transparent, #fff);
+  }
+  .effect.horizontal:nth-child(even) {
+    animation: effectLeftMove 2s ease-in-out forwards;
+    background: linear-gradient(-45deg, transparent, #fff);
+  }
+  .effect.vertical:nth-child(odd) {
+    animation: effectUpMove 2s ease-in-out forwards;
+    background: linear-gradient(45deg, #fff, transparent);
+  }
+  .effect.vertical:nth-child(even) {
+    animation: effectDownMove 2s ease-in-out forwards;
+    background: linear-gradient(45deg, transparent, #fff);
+  }
+  .effect:nth-child(1),
+  .effect:nth-child(5) {
+    top: 0;
+    left: 0;
+  }
+  .effect:nth-child(2),
+  .effect:nth-child(7) {
+    top: 0;
+    right: 0;
+  }
+  .effect:nth-child(3),
+  .effect:nth-child(6) {
+    bottom: 0;
+    left: 0;
+  }
+  .effect:nth-child(4),
+  .effect:nth-child(8) {
+    bottom: 0;
+    right: 0;
+  }
+  .book {
+    position: relative;
+    top: 0;
+    @include Size(400px, 600px);
+    padding: 15px;
+    background: rgb(48, 86, 117);
+    transform: rotate(-37.5deg) skewX(10deg);
+    box-shadow: -35px 35px 50px rgba(0, 0, 0, 1);
+    transition: 0.5s;
+    &:hover {
+      transform: rotate(-37.5deg) skewX(10deg) translate(20px, -20px);
+      box-shadow: -50px 50px 100px rgba(0, 0, 0, 1);
+    }
+    &::before {
+      content: '프론트엔드';
+      padding-left: 5px;
+      padding-top: 20px;
+      overflow: hidden;
+      @include Size(25px, calc(100% - 20px));
+      background: rgb(39, 69, 94);
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: skewY(-45deg) translate(-30px, -15px);
+      box-shadow: inset -10px 0 20px rgba(0, 0, 0, 0.2);
+    }
+    &::after {
+      content: '';
+      @include Size(100%, 30px);
+      background: rgb(255, 255, 255);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transform: skewX(-45deg) translate(15px, 30px);
+      box-shadow: inset -10px 0 20px rgba(0, 0, 0, 0.2);
+    }
+    .cover {
+      background: url(./books.jpg);
+      background-size: contain;
+      background-attachment: fixed;
+      @include Size(100%, 65%);
+    }
+    h2 {
+      position: absolute;
+      bottom: 10px;
+      left: 20px;
+      font-size: 5em;
+      line-height: 1em;
+    }
+  }
+
+  .signin-container {
+    border: 1px solid $primaryColor;
+    border-radius: 15px;
+    overflow: hidden;
+    @include Flex(space-between);
+    @include Size(55%, 70%);
+    &::before {
+      @include VirtualFill(fixed);
+      backdrop-filter: blur(5px);
+      z-index: -1;
+      box-shadow: inset 0px 0px 500px rgb(0, 0, 0, 0.4);
+    }
+    .imgBx {
+      border-right: 2px dashed $primaryColor;
+      @include Size(55%);
+      @include BgSet('./books.jpg', cover, bottom center);
+    }
+    @keyframes BgPosMove {
+      0% {
+        background-position-x: 0;
+      }
+      100% {
+        background-position-y: 50000px;
+        background-position-x: 20000px;
+      }
+    }
+    .mainBx {
+      @include Size(45%);
+      // background: $formBgColor;
+      background: radial-gradient(
+        circle at 30%,
+        rgba(51, 51, 51, 0.205),
+        #333 20%,
+        rgba(238, 238, 238, 0.3) 25%,
+        #333 25%
+      );
+      animation: BgPosMove 80s linear infinite;
+      padding: 20px;
+      form {
+        h1 {
+          color: $primaryColor;
+          display: flex;
+          position: relative;
+          align-items: center;
+          text-transform: uppercase;
+          &::before,
+          &::after {
+            content: '';
+            border-bottom: solid $primaryColor;
+            border-width: 0.05em 0;
+            height: 0.1em;
+            margin: 0.2em;
+            flex: 1;
+          }
+          &::after {
+            flex: 10;
+          }
+        }
+        input {
+          display: block;
+          padding: 5px 7px;
+          width: 100%;
+          margin: 25px 0;
+        }
+        button {
+          all: unset;
+          margin-right: 14px;
+          background: rgb(30, 55, 92);
+          padding: 5px 8px;
+          min-width: 80px;
+          text-align: center;
+          font-size: 1.1em;
+          border: 1px solid $primaryColor;
+        }
+      }
+      .decoration {
+        clear: both;
+        h2 {
+          color: $primaryColor;
+          position: relative;
+          &::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: $borderColor;
+          }
+        }
+      }
+    }
+  }
+}
