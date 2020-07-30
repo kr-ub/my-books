@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import {message} from "antd";
 import withAuth from "../hocs/withAuth";
 import "./signin.scss";
 
@@ -8,6 +7,8 @@ class Signin extends React.Component {
   state = {
     email: "",
   };
+  errorEmailMsgRef = React.createRef();
+  errorPwMsgRef = React.createRef();
   passwordRef = React.createRef(); // 한번 만들어지면 객체 인스턴스는 그대로
   render() {
     return (
@@ -32,17 +33,21 @@ class Signin extends React.Component {
         <div className="signin-container">
           <div className="imgBx"></div>
           <div className="mainBx">
-            <form>
+            <form onSubmit={(e) => e.preventDefault()}>
               <h1>sign in</h1>
               <input
                 type="text"
                 value={this.state.email}
                 onChange={this.change}
               />
+              <p ref={this.errorEmailMsgRef}></p>
               <input type="password" ref={this.passwordRef} />
-              <button onClick={this.click}>로그인</button>
-              <button>회원가입</button>
-              <button>아이디/비밀번호 찾기</button>
+              <p ref={this.errorPwMsgRef}></p>
+              <div className="btn-group">
+                <button onClick={this.click}>로그인</button>
+                <button>회원가입</button>
+                <button>아이디/비밀번호 찾기</button>
+              </div>
             </form>
             <div className="decoration">
               <div className="content">
@@ -68,9 +73,7 @@ class Signin extends React.Component {
     );
   }
 
-  click = async () => {
-    console.log("login", this.state.email, this.passwordRef.current.value);
-
+  click = async (e) => {
     const email = this.state.email;
     const password = this.passwordRef.current.value;
 
@@ -83,22 +86,30 @@ class Signin extends React.Component {
       });
       const token = response.data.token;
       localStorage.setItem("token", token);
-      // 2. 홈으로 이동시킨다.
       this.props.history.push("/");
     } catch (error) {
       const errorCode = error?.response?.data?.error || "NOT_MATCH";
       if (errorCode === "PASSWORD_NOT_MATCH") {
-        message.error("패스워드가 일치하지 않습니다.");
+        this.errorMessage("패스워드가 일치하지 않습니다.");
       } else if (errorCode === "USER_NOT_EXIST") {
-        message.error("없는 이메일입니다.");
+        this.errorMessage("존재하지 않는 이메일입니다.", "email");
       } else {
-        message.error("에러");
+        this.errorMessage("알수없는 에러");
       }
     }
   };
-
+  errorMessage = (str, check) => {
+    const { errorEmailMsgRef, errorPwMsgRef } = this;
+    if (check) {
+      errorEmailMsgRef.current.textContent = str;
+      errorPwMsgRef.current.textContent = "";
+    } else {
+      errorEmailMsgRef.current.textContent = "";
+      errorPwMsgRef.current.textContent = str;
+    }
+  };
   change = (e) => {
-    this.setState({email: e.target.value});
+    this.setState({ email: e.target.value });
   };
 }
 

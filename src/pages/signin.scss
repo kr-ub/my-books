@@ -5,6 +5,7 @@ $primaryColor: #fff;
 $borderColor: #2eb9ae;
 $isActiveColor: #adffab;
 $formBgColor: #4874ad;
+$errorColor: rgb(255, 110, 122);
 
 @mixin BgSet($path, $size, $pos: center) {
   background: url($path);
@@ -18,7 +19,7 @@ $formBgColor: #4874ad;
   align-items: $align;
 }
 @mixin VirtualFill($pos: absolute) {
-  content: '';
+  content: "";
   position: $pos;
   top: 0;
   left: 0;
@@ -36,7 +37,7 @@ $formBgColor: #4874ad;
   color: $primaryColor;
   overflow: hidden;
   @include Size(100%, 100%);
-  @include BgSet('./bookcafeBg.jpg', cover, bottom center);
+  @include BgSet("./bookcafeBg.jpg", cover, bottom center);
   @include Flex();
   @keyframes effectRightMove {
     0% {
@@ -118,7 +119,7 @@ $formBgColor: #4874ad;
     top: 0;
     @include Size(400px, 600px);
     padding: 15px;
-    background: rgb(48, 86, 117);
+    background: rgb(48, 117, 106);
     transform: rotate(-37.5deg) skewX(10deg);
     box-shadow: -35px 35px 50px rgba(0, 0, 0, 1);
     transition: 0.5s;
@@ -127,12 +128,12 @@ $formBgColor: #4874ad;
       box-shadow: -50px 50px 100px rgba(0, 0, 0, 1);
     }
     &::before {
-      content: '프론트엔드';
+      content: "프론트엔드";
       padding-left: 5px;
       padding-top: 20px;
       overflow: hidden;
       @include Size(25px, calc(100% - 20px));
-      background: rgb(39, 69, 94);
+      background: rgb(42, 102, 92);
       position: absolute;
       top: 0;
       left: 0;
@@ -140,7 +141,7 @@ $formBgColor: #4874ad;
       box-shadow: inset -10px 0 20px rgba(0, 0, 0, 0.2);
     }
     &::after {
-      content: '';
+      content: "";
       @include Size(100%, 30px);
       background: rgb(255, 255, 255);
       position: absolute;
@@ -150,14 +151,15 @@ $formBgColor: #4874ad;
       box-shadow: inset -10px 0 20px rgba(0, 0, 0, 0.2);
     }
     .cover {
-      background: url(./books.jpg);
+      background: url(./books.png);
       background-size: contain;
       background-attachment: fixed;
+      background-repeat: no-repeat;
       @include Size(100%, 65%);
     }
     h2 {
       position: absolute;
-      bottom: 10px;
+      bottom: -40px;
       left: 20px;
       font-size: 5em;
       line-height: 1em;
@@ -174,12 +176,12 @@ $formBgColor: #4874ad;
       @include VirtualFill(fixed);
       backdrop-filter: blur(5px);
       z-index: -1;
-      box-shadow: inset 0px 0px 500px rgb(0, 0, 0, 0.4);
+      box-shadow: inset 0px 0px 500px rgba(0, 0, 0, 0.4);
     }
     .imgBx {
       border-right: 2px dashed $primaryColor;
       @include Size(55%);
-      @include BgSet('./books.jpg', cover, bottom center);
+      @include BgSet("./books.jpg", cover, bottom center);
     }
     @keyframes BgPosMove {
       0% {
@@ -211,7 +213,7 @@ $formBgColor: #4874ad;
           text-transform: uppercase;
           &::before,
           &::after {
-            content: '';
+            content: "";
             border-bottom: solid $primaryColor;
             border-width: 0.05em 0;
             height: 0.1em;
@@ -228,24 +230,36 @@ $formBgColor: #4874ad;
           width: 100%;
           margin: 25px 0;
         }
-        button {
-          all: unset;
-          margin-right: 14px;
-          background: rgb(30, 55, 92);
-          padding: 5px 8px;
-          min-width: 80px;
-          text-align: center;
-          font-size: 1.1em;
-          border: 1px solid $primaryColor;
+        p {
+          color: $errorColor;
+          margin-top: -15px;
+        }
+        .btn-group {
+          display: flex;
+          align-items: center;
+          button {
+            &:first-child,
+            &:hover {
+              background: rgb(30, 55, 92);
+              transition: 0.4s;
+            }
+            all: unset;
+            cursor: pointer;
+            margin-right: 14px;
+            padding: 5px 8px;
+            min-width: 80px;
+            text-align: center;
+            font-size: 1.1em;
+            border: 1px solid $primaryColor;
+          }
         }
       }
       .decoration {
-        clear: both;
         h2 {
           color: $primaryColor;
           position: relative;
           &::before {
-            content: '';
+            content: "";
             position: absolute;
             bottom: -5px;
             left: 0;
@@ -253,6 +267,69 @@ $formBgColor: #4874ad;
             height: 1px;
             background: $borderColor;
           }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 1700px) {
+  .signin-body {
+    .book {
+      display: none;
+    }
+  }
+}
+@media (max-width: 1500px) {
+  .signin-body {
+    .signin-container {
+      min-width: 90%;
+    }
+  }
+}
+@media (max-width: 1200px) {
+  .signin-body {
+    .signin-container {
+      .imgBx {
+        width: 40%;
+      }
+      .mainBx {
+        flex: 1;
+      }
+    }
+  }
+}
+@media (max-width: 880px) {
+  .signin-body {
+    .signin-container {
+      .imgBx {
+        display: none;
+      }
+      .mainBx {
+        flex: 1;
+        form {
+          .btn-group {
+            flex-flow: column;
+            justify-content: stretch;
+            align-items: flex-start;
+            button {
+              margin: 7px 0;
+            }
+          }
+        }
+        .decoration {
+          font-size: 0.85em;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 500px) {
+  .signin-body {
+    .signin-container {
+      @include Size(90%, 60%);
+      .mainBx {
+        .decoration {
+          display: none;
         }
       }
     }
