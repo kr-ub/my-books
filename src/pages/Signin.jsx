@@ -9,7 +9,7 @@ class Signin extends React.Component {
   };
   errorEmailMsgRef = React.createRef();
   errorPwMsgRef = React.createRef();
-  passwordRef = React.createRef(); // 한번 만들어지면 객체 인스턴스는 그대로
+  passwordRef = React.createRef();
   render() {
     return (
       <div className="signin-body">
