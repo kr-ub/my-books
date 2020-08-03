@@ -179,7 +179,6 @@ $errorColor: rgb(255, 110, 122);
       box-shadow: inset 0px 0px 500px rgba(0, 0, 0, 0.4);
     }
     .imgBx {
-      border-right: 2px dashed $primaryColor;
       @include Size(55%);
       @include BgSet("./books.jpg", cover, bottom center);
     }
