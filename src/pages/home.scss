@@ -247,22 +247,3 @@ header {
     }
   }
 }
-@media (max-width: 1600px) {
-  .home-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    &::after {
-      content: "개발 중...";
-      background: none;
-      font-size: 3em;
-      color: #fff;
-    }
-    main {
-      display: none;
-    }
-    form.search {
-      display: none;
-    }
-  }
-}
