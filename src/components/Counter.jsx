@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
-import useWindowWidth from "../hooks/useWindowWidth";
-import PersonContext from "../context/PersonContext";
+import React, { useContext } from 'react';
+import useWindowWidth from '../hooks/useWindowWidth';
+import PersonContext from '../context/PersonContext';
 
 // state = {
 //     count: 0
@@ -44,7 +44,7 @@ export default function Counter() {
   //   }, [state]);
 
   const click = React.useCallback(() => {
-    console.log("+");
+    console.log('+');
     setState({ count: state.count + 1 });
   }, [state]);
 

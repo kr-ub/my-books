@@ -3,11 +3,15 @@ import gsap from "gsap";
 
 export default function Book({ title, url, message, author }) {
   useEffect(() => {
-    gsap.to("figure", 1.5, { y: 200, opacity: 1 });
+    gsap.fromTo(
+      "figure",
+      { y: "random(400, -400)", opacity: 0 },
+      { y: 0, opacity: 1, duration: 1.5 }
+    );
   }, []);
   function mouseOver(e) {
     if (!e.target.matches("figure > img")) return;
-    gsap.timeline().to(e.target, 0.9, { scale: 0.7 });
+    gsap.timeline().to(e.target, 0.9, { scale: 1.2 });
   }
   function mouseLeave(e) {
     if (!e.target.matches("figure > img")) return;

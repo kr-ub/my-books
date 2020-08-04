@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 function sum(persons) {
-  console.log("sum...");
+  console.log('sum...');
   return persons.map((person) => person.age).reduce((l, r) => l + r, 0);
 }
 
 const Example9 = () => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
   const [persons] = useState([
-    { name: "Mark", age: 38 },
-    { name: "Hanna", age: 27 },
+    { name: 'Mark', age: 38 },
+    { name: 'Hanna', age: 27 },
   ]);
 
   function change(e) {

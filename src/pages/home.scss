@@ -1,6 +1,7 @@
 @import "./signin.scss";
 body {
   height: 100vh;
+  overflow: hidden;
 }
 * {
   margin: 0;
@@ -168,16 +169,16 @@ header {
   }
   main {
     @include Size();
-    @include Flex(center, flex-start);
+    @include Flex();
     flex-flow: wrap;
     figure {
       z-index: 5;
-      opacity: 0;
       overflow: hidden;
       @include Size(260px, 350px);
       margin: 0 20px;
       position: relative;
-      box-shadow: inset 0px 0px 30px 1px #000;
+      top: 0;
+      left: 0;
       &:hover figcaption {
         bottom: 0;
       }
@@ -244,6 +245,71 @@ header {
         opacity: 1;
         transition-delay: 0.15s;
       }
+    }
+  }
+}
+@media (max-width: 900px) {
+  header {
+    display: none;
+  }
+  .home-body {
+    @include Size(100%, auto);
+    main {
+      margin-top: 60px;
+      figure {
+        min-width: 500px;
+        margin: 30px 200px;
+        height: 700px;
+        figcaption {
+          font-size: 1.5em;
+        }
+      }
+    }
+    form.search {
+      width: 400px;
+    }
+  }
+}
+@media (max-width: 1400px) {
+  body {
+    all: unset;
+    font-family: "Noto Sans KR", sans-serif;
+  }
+  header {
+    @include Size(100%, 100vh);
+    .header-container {
+      @include Size(100%, 100%);
+      &::before {
+        all: unset;
+      }
+      nav {
+        flex-flow: row;
+        justify-content: flex-start;
+        margin-left: 180px;
+        a {
+          margin: 30px 20px;
+        }
+      }
+      .face {
+        display: none;
+      }
+    }
+  }
+  .home-body {
+    @include Size(100%, auto);
+    main {
+      margin-top: 60px;
+      figure {
+        min-width: 500px;
+        margin: 30px 200px;
+        height: 700px;
+        figcaption {
+          font-size: 1.5em;
+        }
+      }
+    }
+    form.search {
+      width: 400px;
     }
   }
 }
