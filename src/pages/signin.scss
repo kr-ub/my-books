@@ -37,7 +37,7 @@ $errorColor: rgb(255, 110, 122);
   color: $primaryColor;
   overflow: hidden;
   @include Size(100%, 100%);
-  @include BgSet("./bookcafeBg.jpg", cover, bottom center);
+  @include BgSet("./img/bookcafeBg.jpg", cover, bottom center);
   @include Flex();
   @keyframes effectRightMove {
     0% {
@@ -151,7 +151,7 @@ $errorColor: rgb(255, 110, 122);
       box-shadow: inset -10px 0 20px rgba(0, 0, 0, 0.2);
     }
     .cover {
-      background: url(./books.png);
+      background: url(./img/books.png);
       background-size: contain;
       background-attachment: fixed;
       background-repeat: no-repeat;
@@ -179,9 +179,8 @@ $errorColor: rgb(255, 110, 122);
       box-shadow: inset 0px 0px 500px rgba(0, 0, 0, 0.4);
     }
     .imgBx {
-      border-right: 2px dashed $primaryColor;
       @include Size(55%);
-      @include BgSet("./books.jpg", cover, bottom center);
+      @include BgSet("./img/books.jpg", cover, bottom center);
     }
     @keyframes BgPosMove {
       0% {
@@ -247,9 +246,10 @@ $errorColor: rgb(255, 110, 122);
             cursor: pointer;
             margin-right: 14px;
             padding: 5px 8px;
-            min-width: 80px;
+            min-width: 50px;
+            height: 25px;
             text-align: center;
-            font-size: 1.1em;
+            font-size: 0.8em;
             border: 1px solid $primaryColor;
           }
         }

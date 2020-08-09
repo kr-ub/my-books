@@ -1,0 +1,9 @@
+@import "./signin.scss";
+
+.about-body {
+  position: absolute;
+  @include Size(100%, 100vh);
+  padding: 30px 45px;
+  background: linear-gradient(15deg, rgb(25, 39, 49) 50%, rgb(20, 27, 37) 0%);
+  color: #fff;
+}

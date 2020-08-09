@@ -1,0 +1,320 @@
+@import './signin.scss';
+body {
+  height: 100vh;
+  overflow: hidden;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+header {
+  position: absolute;
+  padding: 20px;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  pointer-events: none;
+  @include Size(100%, 100vh);
+  .header-container {
+    @include Size(100%, 100%);
+    &::before {
+      box-sizing: border-box;
+      @include VirtualFill();
+      pointer-events: none;
+      z-index: -9;
+      border: 7.2px solid;
+      border-image: url('https://d3a5h34gwy5glx.cloudfront.net/assets/images/side-sprite.7c59eee706a4fa9c57672e4a6deb42ed.png')
+        10 / 7.2px;
+    }
+    nav {
+      @include Flex(center, start);
+      height: 100%;
+      flex-flow: column;
+      a {
+        pointer-events: all;
+        z-index: 10;
+        display: block;
+        background: rgb(255, 255, 255);
+        box-shadow: inset 5px 0 10px 0 rgb(52, 96, 192);
+        color: rgb(36, 52, 102);
+        text-decoration: none;
+        border-radius: 10px;
+        border: 1px solid rgb(52, 96, 192);
+        margin: 20px 0;
+        padding: 7px;
+        transform: translate(-20%, -50%);
+        width: 60px;
+        text-align: center;
+        font-size: 1.5em;
+        transition: 0.5s;
+        &:hover,
+        &.active {
+          box-shadow: inset 100px 0 10px 0 rgb(52, 96, 192);
+          color: #fff;
+          border: 1px solid #fff;
+        }
+      }
+    }
+    .face {
+      position: fixed;
+      bottom: 0px;
+      left: 45%;
+      @include Size(150px, 150px);
+      border-radius: 50%;
+      background: transparent;
+      pointer-events: all;
+      @include Flex();
+      &:hover {
+        background: linear-gradient(180deg, #ffffff, #ffffff, transparent);
+      }
+      &::before {
+        content: '';
+        position: absolute;
+        top: 95px;
+        @include Size(75px, 35px);
+        border-bottom-left-radius: 35px;
+        border-bottom-right-radius: 35px;
+        background: #fff;
+        transition: 0.5s;
+      }
+      &:hover::before {
+        @include Size(75px, 10px);
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        background: #000;
+      }
+      .eyes {
+        position: relative;
+        top: -20px;
+        display: flex;
+        flex-wrap: wrap;
+        .eye {
+          position: relative;
+          @include Size(40px, 40px);
+          display: block;
+          margin: 0 7.5px;
+          background: #fff;
+          border-radius: 50%;
+          &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 25px;
+            transform: translate(-50%, -50%);
+            @include Size(20px, 20px);
+            background: #333;
+            border-radius: 50%;
+          }
+        }
+      }
+    }
+  }
+}
+.home-body {
+  @include Size(100%, 100vh);
+  padding: 30px 45px;
+  background: linear-gradient(15deg, rgb(25, 39, 49) 50%, rgb(20, 27, 37) 0%);
+  color: #fff;
+  &::before {
+    @include VirtualFill(fixed);
+    pointer-events: none;
+    z-index: -100;
+  }
+  h1 {
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 30px 45px;
+  }
+  .search {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30%;
+    @include Flex();
+    margin: 35px 45px;
+    time {
+      white-space: nowrap;
+      padding: 4px 15px;
+      border-right: 1px solid #e8e8e8;
+      color: #53585c;
+    }
+    input {
+      border: 1px solid #e0e0e0;
+      @include Size(100%);
+      margin-left: 15px;
+      padding: 10px;
+      border-radius: 4px;
+      color: #000;
+    }
+    span {
+      position: absolute;
+      right: 5%;
+      display: block;
+      @include Size(30px, 30px);
+      position: relative;
+    }
+    input:hover ~ i,
+    input:focus ~ i {
+      opacity: 0;
+    }
+    i {
+      opacity: 1;
+      transition: 0.5s;
+      position: absolute;
+      right: 10px;
+      color: #000;
+      pointer-events: none;
+    }
+  }
+  main {
+    @include Size();
+    @include Flex();
+    flex-flow: wrap;
+    figure {
+      z-index: 5;
+      overflow: hidden;
+      @include Size(260px, 350px);
+      margin: 0 20px;
+      position: relative;
+      top: 0;
+      left: 0;
+      &:hover figcaption {
+        bottom: 0;
+      }
+      h2 {
+        color: #fff;
+        z-index: 4;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: rgb(22, 64, 80);
+        font-size: 0.78em;
+        padding: 5px;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+      }
+      figcaption {
+        position: absolute;
+        bottom: -120%;
+        left: 0;
+        transition: 0.7s;
+        padding: 7px;
+        font-size: 0.8em;
+        background: linear-gradient(
+          15deg,
+          rgba(18, 28, 59, 0.8) 50%,
+          rgba(64, 86, 100, 0.8) 0%
+        );
+        @include Size(100%, 30%);
+        box-shadow: 0px 0px 100px 0px #000;
+        h3 {
+          color: #fff;
+          font-size: 1.15em;
+          font-weight: 800;
+        }
+        .author {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          font-size: 0.75em;
+          padding: 7px;
+        }
+        p {
+          font-weight: 400;
+        }
+      }
+      &::before {
+        content: '';
+        pointer-events: none;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0) 0%,
+          rgba(0, 0, 0, 0.7) 100%
+        );
+        @include VirtualFill();
+        opacity: 0;
+        top: 100%;
+        left: 0;
+        z-index: 2;
+        transition-property: top, opacity;
+        transition-duration: 0.3s;
+      }
+      &:hover::before {
+        top: 50%;
+        opacity: 1;
+        transition-delay: 0.15s;
+      }
+    }
+  }
+}
+@media (max-width: 900px) {
+  header {
+    display: none;
+  }
+  .home-body {
+    min-height: 100vh;
+    @include Size(100%, auto);
+    main {
+      margin-top: 60px;
+      figure {
+        min-width: 500px;
+        margin: 30px 200px;
+        height: 700px;
+        figcaption {
+          font-size: 1.5em;
+        }
+      }
+    }
+    form.search {
+      width: 400px;
+    }
+  }
+}
+@media (max-width: 1400px) {
+  body {
+    all: unset;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  header {
+    @include Size(100%, 100vh);
+    .header-container {
+      @include Size(100%, 100%);
+      &::before {
+        all: unset;
+      }
+      nav {
+        flex-flow: row;
+        justify-content: flex-start;
+        margin-left: 180px;
+        a {
+          margin: 30px 20px;
+        }
+      }
+      .face {
+        display: none;
+      }
+    }
+  }
+  .home-body {
+    @include Size(100%, auto);
+    main {
+      margin-top: 60px;
+      figure {
+        min-width: 500px;
+        margin: 30px 200px;
+        height: 700px;
+        figcaption {
+          font-size: 1.5em;
+        }
+      }
+    }
+    form.search {
+      width: 400px;
+    }
+  }
+}
